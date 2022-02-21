@@ -1,11 +1,28 @@
 #playlist_creator{
-    display:flex
+    display:flex;
+    justify-content: space-around;
+}
+
+#playlist_creator > div {
+    margin: 2em;
 }
 
 ul{
+    padding: 0;
     list-style-type:none;
 }
 
 h1{
     text-align: center;
+}
+
+h3{
+    text-decoration: underline;
+    color: gray;
+}
+
+li{
+    padding-top: .5em;
+    padding-bottom:.5em;
+    border-bottom: solid darkgray 1px;
 }
