@@ -4,6 +4,7 @@ const {syncAndSeed, Song, Artist, CurrentlyPlaying} = require('./db/db.js');
 const path = require('path');
 
 app.use(express.static('./src'));
+app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {console.log(`listening on port: ${PORT}`)})
@@ -37,6 +38,15 @@ app.get('/api/current', async (req, res, next) => {
     }
 })
 
+app.get('/api/artists', async (req, res, next) => {
+    try{
+        res.send(await Artist.findAll());
+    }
+    catch(error){
+        next(error);
+    }
+})
+
 app.post('/api/current/:id', async (req, res, next) => {
     try{
         console.log(req.params.id);
@@ -55,6 +65,17 @@ app.delete('/api/current/:id', async (req, res, next) => {
         song.destroy();
         
         res.sendStatus(204);
+    }
+    catch(error){
+        next(error);
+    }
+})
+
+app.post('/api/artist', async (req, res, next) => {
+    try{
+        await Artist.create({name: req.body.name});
+        console.log('test');
+        res.sendStatus(201);
     }
     catch(error){
         next(error);
