@@ -20,7 +20,6 @@ const init = async () => {
     const artists = response.data.map((artist) => {
         return `<option value='${artist.id}'>${artist.name}</option>`
     }).join('');
-    console.log(artists);
     document.querySelector('#artists').innerHTML = artists;
 }
 init();
@@ -52,7 +51,7 @@ document.querySelector('#new_song_button').addEventListener('click', async (even
     const nameBox = document.querySelector('#new_song_input')
     const artistSelect = document.querySelector('#artists');
     const song = {name: nameBox.value, ArtistId: artistSelect.value};
+    await axios.post(`/api/song/`, song);
     nameBox.value = '';
-    console.log(await axios.post(`/api/song/`, song));
     init();
 })
