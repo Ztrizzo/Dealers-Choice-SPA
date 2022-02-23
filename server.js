@@ -49,7 +49,6 @@ app.get('/api/artists', async (req, res, next) => {
 
 app.post('/api/current/:id', async (req, res, next) => {
     try{
-        console.log(req.params.id);
         await CurrentlyPlaying.create({SongId: req.params.id});
         res.sendStatus(200);
     }
@@ -60,7 +59,6 @@ app.post('/api/current/:id', async (req, res, next) => {
 
 app.delete('/api/current/:id', async (req, res, next) => {
     try{
-        console.log(req.params.id);
         const song = await CurrentlyPlaying.findByPk(req.params.id);
         song.destroy();
         
@@ -74,7 +72,17 @@ app.delete('/api/current/:id', async (req, res, next) => {
 app.post('/api/artist', async (req, res, next) => {
     try{
         await Artist.create({name: req.body.name});
-        console.log('test');
+        res.sendStatus(201);
+    }
+    catch(error){
+        next(error);
+    }
+})
+
+app.post('/api/song', async (req, res, next) => {
+    try{
+        await Song.create({name: req.body.name, ArtistId: req.body.ArtistId});
+        
         res.sendStatus(201);
     }
     catch(error){

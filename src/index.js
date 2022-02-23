@@ -18,7 +18,7 @@ const init = async () => {
     //load select
     response = await axios.get('/api/artists');
     const artists = response.data.map((artist) => {
-        return `<option value='${artist.name}'>${artist.name}</option>`
+        return `<option value='${artist.id}'>${artist.name}</option>`
     }).join('');
     console.log(artists);
     document.querySelector('#artists').innerHTML = artists;
@@ -41,9 +41,18 @@ document.querySelector('#playing').addEventListener('click', async (event) => {
 })
 
 document.querySelector('#new_artist_button').addEventListener('click', async (event) => {
-    const nameBox = document.querySelector('input')
+    const nameBox = document.querySelector('#new_artist_input')
     const artist = {name: nameBox.value};
     nameBox.value = '';
     await axios.post(`/api/artist/`, artist);
+    init();
+})
+
+document.querySelector('#new_song_button').addEventListener('click', async (event) => {
+    const nameBox = document.querySelector('#new_song_input')
+    const artistSelect = document.querySelector('#artists');
+    const song = {name: nameBox.value, ArtistId: artistSelect.value};
+    nameBox.value = '';
+    console.log(await axios.post(`/api/song/`, song));
     init();
 })

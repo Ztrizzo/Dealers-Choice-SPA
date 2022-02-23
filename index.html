@@ -13,25 +13,33 @@
     <h1>Playlist Creator</h1>
     <div id="playlist_creator">
         <div>
-            <h3>Songs</h3>
+            <h3>Songs (click to add)</h3>
             <ul id="song_list"></ul>
         </div>
         <div>
-            <h3>Currently Playing</h3>
+            <h3>Currently Playing (click to remove)</h3>
             <ul id="playing"></ul>
         </div>
         
     </div>
-    <form>
-        <input id='new_artist_input'/>
-        <button type="button" id="new_artist_button">add</button>
-    </form>
-    <form>
-        <input id="new_song_input"/>
-        <select id="artists"></select>
-        
-        <button type="button" id="new_song_button">add</button>
-    </form>
+    <section id="add">
+        <h3>Add New Artist</h3>
+        <form>
+            <div>
+                <input id='new_artist_input'/>
+                <button type="button" id="new_artist_button">add</button>
+            </div>
+        </form>
+        <h3>Add New Song</h3>
+        <form>
+            <div>
+                <input id="new_song_input"/>
+                <select id="artists"></select>
+                
+                <button type="button" id="new_song_button">add</button>
+            </div>
+        </form>
+    </section>
         
 
     
